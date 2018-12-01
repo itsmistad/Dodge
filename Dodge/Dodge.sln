@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dodge.Engine", "Dodge.Engine\Dodge.Engine.vcxproj", "{24C407F8-63F0-4177-86F7-1EB07F2A0B28}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dodge.Logger", "Dodge.Logger\Dodge.Logger.vcxproj", "{5ED34F2B-6231-4832-B64E-6FFB188FCD7E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dodge.Network", "Dodge.Network\Dodge.Network.vcxproj", "{C15B10F9-7416-460D-903F-20CB3EA9B7F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24C407F8-63F0-4177-86F7-1EB07F2A0B28}.Debug|x64.ActiveCfg = Debug|x64
+		{24C407F8-63F0-4177-86F7-1EB07F2A0B28}.Debug|x64.Build.0 = Debug|x64
+		{24C407F8-63F0-4177-86F7-1EB07F2A0B28}.Release|x64.ActiveCfg = Release|x64
+		{24C407F8-63F0-4177-86F7-1EB07F2A0B28}.Release|x64.Build.0 = Release|x64
+		{5ED34F2B-6231-4832-B64E-6FFB188FCD7E}.Debug|x64.ActiveCfg = Debug|x64
+		{5ED34F2B-6231-4832-B64E-6FFB188FCD7E}.Debug|x64.Build.0 = Debug|x64
+		{5ED34F2B-6231-4832-B64E-6FFB188FCD7E}.Release|x64.ActiveCfg = Release|x64
+		{5ED34F2B-6231-4832-B64E-6FFB188FCD7E}.Release|x64.Build.0 = Release|x64
+		{C15B10F9-7416-460D-903F-20CB3EA9B7F1}.Debug|x64.ActiveCfg = Debug|x64
+		{C15B10F9-7416-460D-903F-20CB3EA9B7F1}.Debug|x64.Build.0 = Debug|x64
+		{C15B10F9-7416-460D-903F-20CB3EA9B7F1}.Release|x64.ActiveCfg = Release|x64
+		{C15B10F9-7416-460D-903F-20CB3EA9B7F1}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7A8BAFA3-75A0-4618-BA9A-A0D314A0E831}
+	EndGlobalSection
+EndGlobal
