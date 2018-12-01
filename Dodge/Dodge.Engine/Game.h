@@ -15,7 +15,7 @@
 class Game : public IDeviceNotify
 {
 public:
-	const wstring DodgeVersion = L"1.0.0";
+	const wstring DodgeVersion = L"1.0.1";
 	static Game * Current;
 
     Game() noexcept(false);
