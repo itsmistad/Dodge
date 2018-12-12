@@ -10,6 +10,6 @@ public:
 
 	Font(unique_ptr<SpriteFont> sprite);
 	void Draw(SpriteBatch * spriteBatch, wstring text, int fontSize, Vector2 position, XMVECTORF32 color);
-	Vector2 Measure(wstring text, int fontSize);
+	Vector2 Measure(wstring text);
 	void Reset();
 };

@@ -3,8 +3,10 @@
 
 Gameplay::Gameplay()
 {
-	gravity = 9.8f;
-	walkSpeed = 2.f;
-	sprintSpeed = 6.f;
-	jumpSpeed = 3.f;
+	gravity = 0.5f;
+	walkSpeed = 1.2f;
+	sprintSpeed = 2.5f;
+	jumpSpeed = 1;
+	mouseSensitivity = 5;
+	mouseSmoothing = 2;
 }

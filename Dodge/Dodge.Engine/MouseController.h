@@ -1,5 +1,6 @@
 #pragma once
-#include "KeyboardController.h"
+#include "Headers.h"
+#include "ObjectManager.h"
 #include "Menu.h"
 
 enum MouseButtons
@@ -12,23 +13,26 @@ class MouseController
 private:
 	vector<int> pressed, released;
 	unique_ptr<Mouse> mouse;
-	Vector3 delta;
+	Vector2 delta, smoothedDelta;
 	bool locked;
+	float tempMasterVolume, tempEffectsVolume, tempMusicVolume, tempUiVolume;
 
 	void AddPressed(int key);
 	void AddReleased(int key);
 	void RemovePressed(int key);
 	void RemoveReleased(int key);
-	void OnMousePress(int key);
+	void OnMousePress(int key, DX::DeviceResources * deviceResources);
 	void OnMouseRelease(int key);
 	bool IsMousePressed(int key);
 	bool IsMouseReleased(int key);
 public:
+	static MouseController * Current;
+
 	MouseController();
 	void Initialize(HWND windowHandle);
-	void ProcessMouseState();
+	void ProcessMouseState(float elapsedTime, float deltaTime, DX::DeviceResources * deviceResources);
 	void SetLock(bool value);
-	Vector3 GetDelta();
+	Vector2 GetDelta();
 	int GetX();
 	int GetY();
 };
