@@ -4,7 +4,7 @@
 #include <Log.h>
 using json = nlohmann::json;
 
-Configs Configs::current;
+Configs * Configs::Current = NULL;
 
 Configs::Configs()
 {
@@ -24,61 +24,84 @@ json Configs::LoadJSON(string filePath)
 	return j;
 }
 
+bool Configs::SaveJSON(string filePath, json j)
+{
+	ofstream out(filePath);
+	if (out.is_open() && !j.empty())
+	{
+		out << j;
+		return true;
+	}
+	else
+		Log::Error("Failed to load config file (%s).", filePath.c_str());
+	return false;
+}
+
 void Configs::Load()
 {
-	auto temp = Configs::LoadJSON(current.audioConfigPath);
-	if (temp.empty()) current.audioConfig = Audio();
-	else current.audioConfig = temp;
+	Current = new Configs();
 
-	temp = Configs::LoadJSON(current.videoConfigPath);
-	if (temp.empty()) current.videoConfig = Video();
-	else current.videoConfig = temp;
+	auto temp = Configs::LoadJSON(Current->audioConfigPath);
+	if (temp.empty()) Current->audioConfig = Audio();
+	else Current->audioConfig = temp;
 
-	temp = Configs::LoadJSON(current.gameplayConfigPath);
-	if (temp.empty()) current.gameplayConfig = Gameplay();
-	else current.gameplayConfig = temp;
+	temp = Configs::LoadJSON(Current->videoConfigPath);
+	if (temp.empty()) Current->videoConfig = Video();
+	else Current->videoConfig = temp;
 
-	temp = Configs::LoadJSON(current.keybindsConfigPath);
-	if (temp.empty()) current.keybindsConfig = Keybinds();
-	else current.keybindsConfig = temp;
+	temp = Configs::LoadJSON(Current->gameplayConfigPath);
+	if (temp.empty()) Current->gameplayConfig = Gameplay();
+	else Current->gameplayConfig = temp;
+
+	temp = Configs::LoadJSON(Current->keybindsConfigPath);
+	if (temp.empty()) Current->keybindsConfig = Keybinds();
+	else Current->keybindsConfig = temp;
+}
+
+void Configs::Save()
+{
+	Configs::SaveJSON(Current->audioConfigPath, Current->audioConfig);
+	Configs::SaveJSON(Current->videoConfigPath, Current->videoConfig);
+	Configs::SaveJSON(Current->gameplayConfigPath, Current->gameplayConfig);
+	Configs::SaveJSON(Current->keybindsConfigPath, Current->keybindsConfig);
 }
 
 string Configs::GetAudioPath()
 {
-	return current.audioConfigPath;
+	return Current->audioConfigPath;
 }
 
 string Configs::GetVideoPath()
 {
-	return current.videoConfigPath;
+	return Current->videoConfigPath;
 }
 
 string Configs::GetGameplayPath()
 {
-	return current.gameplayConfigPath;
+	return Current->gameplayConfigPath;
 }
 
 string Configs::GetKeybindsPath()
 {
-	return current.keybindsConfigPath;
+	return Current->keybindsConfigPath;
 }
 
 Audio Configs::GetAudio()
 {
-	return current.audioConfig;
+	return Current->audioConfig;
 }
 
 Video Configs::GetVideo()
 {
-	return current.videoConfig;
+	return Current->videoConfig;
 }
 
 Gameplay Configs::GetGameplay()
 {
-	return current.gameplayConfig;
+	return Current->gameplayConfig;
 }
 
 Keybinds Configs::GetKeybinds()
 {
-	return current.keybindsConfig;
+	return Current->keybindsConfig;
 }

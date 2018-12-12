@@ -1,11 +1,1 @@
-{
-    "forward": 87,
-    "backward": 83,
-    "left": 65,
-    "right": 68,
-    "jump": 32,
-    "sprint": 160,
-    "use": 70,
-    "escape": 27,
-    "enter": 13
-}
+{"backward":83,"enter":13,"escape":27,"forward":87,"jump":32,"left":65,"right":68,"sprint":160,"use":70}

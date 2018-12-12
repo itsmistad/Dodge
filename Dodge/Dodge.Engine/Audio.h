@@ -3,7 +3,7 @@
 class Audio
 {
 public:
-	float masterVolume, effectsVolume, musicVolume, uiVolume;
+	float masterVolume , effectsVolume, musicVolume, uiVolume;
 
 	Audio();
 };

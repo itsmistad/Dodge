@@ -35,9 +35,6 @@
     <Filter Include="Assets\Sounds\Music">
       <UniqueIdentifier>{077aead3-cb0e-4fa2-87fd-9166e69fae0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menus">
-      <UniqueIdentifier>{ff4e0f89-3ee6-4b94-957c-09b4239e3ccb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\Fonts">
       <UniqueIdentifier>{f46e78ae-744a-47b8-81ef-fcd6ab2e03f5}</UniqueIdentifier>
     </Filter>
@@ -46,6 +43,12 @@
     </Filter>
     <Filter Include="Assets\Images\General">
       <UniqueIdentifier>{7f2c946c-4adc-4895-81a2-d3333df6a1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{ff4e0f89-3ee6-4b94-957c-09b4239e3ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Images\Models">
+      <UniqueIdentifier>{e84dbc31-8338-440b-b5d5-b22cd7fb949b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,16 +105,16 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Objects</Filter>
@@ -120,16 +123,22 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Align.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UIElement.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UIDescriptors.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="StringExtensions.hpp">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -175,16 +184,16 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Image.cpp">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Video.cpp">
       <Filter>Configuration</Filter>
@@ -196,10 +205,13 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UIElement.cpp">
-      <Filter>Menus</Filter>
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +231,6 @@
       <Filter>Assets\Models</Filter>
     </None>
     <None Include="Assets\Models\throwing_star.sdkmesh">
-      <Filter>Assets\Models</Filter>
-    </None>
-    <None Include="Assets\Models\game_map.sdkmesh">
       <Filter>Assets\Models</Filter>
     </None>
     <None Include="Assets\Fonts\roboto.spritefont">
@@ -275,16 +284,10 @@
     <Image Include="Assets\Images\Buttons\purple.png">
       <Filter>Assets\Images\Buttons</Filter>
     </Image>
-    <Image Include="Assets\Images\splash.png">
-      <Filter>Assets\Images\General</Filter>
-    </Image>
     <Image Include="Assets\Images\dodge.ico">
       <Filter>Assets\Images\General</Filter>
     </Image>
     <Image Include="Assets\Images\logo.png">
-      <Filter>Assets\Images\General</Filter>
-    </Image>
-    <Image Include="Assets\Images\small-logo.png">
       <Filter>Assets\Images\General</Filter>
     </Image>
     <Image Include="Assets\Images\General\crosshair.png">
@@ -292,6 +295,12 @@
     </Image>
     <Image Include="Assets\Images\General\background.png">
       <Filter>Assets\Images\General</Filter>
+    </Image>
+    <Image Include="Assets\Images\General\background-transparent.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Images\Models\gamefloor.png">
+      <Filter>Assets\Images\Models</Filter>
     </Image>
   </ItemGroup>
 </Project>

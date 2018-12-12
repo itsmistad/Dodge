@@ -1,6 +1,1 @@
-{
-    "gravity": 9.8,
-    "walkSpeed": 2,
-    "sprintSpeed": 6,
-    "jumpSpeed": 3
-}
+{"gravity":0.5,"jumpSpeed":1.0,"mouseSensitivity":5.0,"mouseSmoothing":2.0,"sprintSpeed":2.5,"walkSpeed":1.2000000476837158}

@@ -32,7 +32,7 @@ void from_json(const json& j, Video& v)
 
 void to_json(json& j, const Gameplay& g)
 {
-	j = json{ {"gravity", g.gravity}, {"walkSpeed", g.walkSpeed}, {"sprintSpeed", g.sprintSpeed}, {"jumpSpeed", g.jumpSpeed} };
+	j = json{ {"gravity", g.gravity}, {"walkSpeed", g.walkSpeed}, {"sprintSpeed", g.sprintSpeed}, {"jumpSpeed", g.jumpSpeed}, {"mouseSensitivity", g.mouseSensitivity}, {"mouseSmoothing", g.mouseSmoothing} };
 }
 void from_json(const json& j, Gameplay& g)
 {
@@ -40,21 +40,33 @@ void from_json(const json& j, Gameplay& g)
 	j.at("walkSpeed").get_to(g.walkSpeed);
 	j.at("sprintSpeed").get_to(g.sprintSpeed);
 	j.at("jumpSpeed").get_to(g.jumpSpeed);
+	j.at("mouseSensitivity").get_to(g.mouseSensitivity);
+	j.at("mouseSmoothing").get_to(g.mouseSmoothing);
 }
 
 void to_json(json& j, const Keybinds& k)
 {
-	j = json{ {"forward", k.forward}, {"backward", k.backward}, {"left", k.left}, {"right", k.right}, {"sprint", k.sprint}, {"jump", k.jump}, {"use", k.use}, {"escape", k.escape}, {"enter", k.enter} };
+	j = json{ {"forward", k.forward->key}, {"backward", k.backward->key}, {"left", k.left->key}, {"right", k.right->key}, {"sprint", k.sprint->key}, {"jump", k.jump->key}, {"use", k.use->key}, {"escape", k.escape->key}, {"enter", k.enter->key} };
 }
 void from_json(const json& j, Keybinds& k)
 {
-	j.at("forward").get_to(k.forward);
-	j.at("backward").get_to(k.backward);
-	j.at("left").get_to(k.left);
-	j.at("right").get_to(k.right);
-	j.at("sprint").get_to(k.sprint);
-	j.at("jump").get_to(k.jump);
-	j.at("use").get_to(k.use);
-	j.at("escape").get_to(k.escape);
-	j.at("enter").get_to(k.enter);
+	int key = 0;
+	j.at("forward").get_to(key);
+	k.forward->SetKey(key);
+	j.at("backward").get_to(key);
+	k.backward->SetKey(key);
+	j.at("left").get_to(key);
+	k.left->SetKey(key);
+	j.at("right").get_to(key);
+	k.right->SetKey(key);
+	j.at("sprint").get_to(key);
+	k.sprint->SetKey(key);
+	j.at("jump").get_to(key);
+	k.jump->SetKey(key);
+	j.at("use").get_to(key);
+	k.use->SetKey(key);
+	j.at("escape").get_to(key);
+	k.escape->SetKey(key);
+	j.at("enter").get_to(key);
+	k.enter->SetKey(key);
 }

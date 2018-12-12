@@ -2,10 +2,6 @@
 #include "Game.h"
 #include <Dbt.h>
 
-#ifdef _DEBUG
-	#include <vld.h>
-#endif
-
 using namespace DirectX;
 
 namespace
@@ -64,7 +60,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 			WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
 			FALSE);
 
-        HWND hwnd = CreateWindowEx(0, L"Dodge_EngineWindowClass", L"Dodge: A gravity driven game",
+        HWND hwnd = CreateWindowEx(0, L"Dodge_EngineWindowClass", L"Dodge",
 			WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
             CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
             nullptr);
