@@ -1,7 +1,9 @@
 
-[![Build Status](https://travis-ci.com/itsmistad/Dodge.svg?branch=master)](https://travis-ci.com/itsmistad/Dodge)
+![Dodge Main Menu](http://cdn.mistad.net/487830.png)
 # Dodge
 A first person perspective, gravity-driven game.
+
+[![Build Status](https://travis-ci.com/itsmistad/Dodge.svg?branch=master)](https://travis-ci.com/itsmistad/Dodge)
 
 You may use any portion of this project for your own use, without the need for credit.
 This is a non-profit, educational code-base that started as an assignment for an introductory Game Programming class at the University of North Texas, `CSCE 3600`.
