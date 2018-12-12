@@ -8,24 +8,26 @@
 class Button : UIElement
 {
 private:
-	Image image;
-	Text text;
-	function<void()> callback;
+	Text * text;
+	Image * image;
+	function<void(Button *)> callback;
 public:
 	Button();
 	Button(ID3D12Device * device, ResourceUploadBatch * resourceUpload,
 		DescriptorHeap * resourceDescriptors, UIDescriptors descriptor, wstring content,
 		wstring buttonFilePath, Align align, Vector2 displacement, Font * font, 
-		float scale, float fontSize, XMVECTORF32 color, function<void()> callback,
+		float scale, int fontSize, XMVECTORF32 color, function<void(Button *)> callback,
 		bool isVisible = true, bool hasOutline = false, bool hasDropShadow = false);
 	Button(ID3D12Device * device, ResourceUploadBatch * resourceUpload,
 		DescriptorHeap * resourceDescriptors, UIDescriptors descriptor, wstring content,
-		wstring buttonFilePath, Vector2 position, Font * font, float scale, float fontSize,
-		XMVECTORF32 color, function<void()> callback,
+		wstring buttonFilePath, Vector2 position, Font * font, float scale, int fontSize,
+		XMVECTORF32 color, function<void(Button *)> callback,
 		bool isVisible = true, bool hasOutline = false, bool hasDropShadow = false);
+	void SetText(wstring content, Font * font, int fontSize, XMVECTORF32 color);
 	float GetWidth();
 	float GetHeight();
 	bool IsInBounds(Vector2 position);
+	Text * GetText();
 	void Callback();
 	void Draw(SpriteBatch * spriteBatch);
 	void Reset();

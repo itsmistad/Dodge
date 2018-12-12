@@ -75,6 +75,8 @@
 #include <Log.h>
 #include <WinUser.h>
 #include <cctype>
+#include <iomanip>
+#include <random>
 
 #include "Configs.h"
 #include "Align.h"

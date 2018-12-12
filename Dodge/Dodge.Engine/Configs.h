@@ -11,17 +11,20 @@ class Configs
 {
 private:
 	static json LoadJSON(string filePath);
+	static bool SaveJSON(string filePath, json j);
 
 	string audioConfigPath, videoConfigPath, gameplayConfigPath, keybindsConfigPath;
+
+public:
 	Audio audioConfig;
 	Video videoConfig;
 	Gameplay gameplayConfig;
 	Keybinds keybindsConfig;
+	static Configs * Current;
 
-	static Configs current;
-public:
 	Configs();
 	static void Load();
+	static void Save();
 
 	static string GetAudioPath();
 	static string GetVideoPath();

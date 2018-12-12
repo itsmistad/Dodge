@@ -1,12 +1,13 @@
 #pragma once
 #include "Headers.h"
-#include "Menu.h"
+#include "MouseController.h"
 
 class KeyboardController
 {
 private:
 	vector<int> pressed, released;
 	unique_ptr<Keyboard> keyboard;
+	MouseController * mouseController;
 
 	void AddPressed(int key);
 	void AddReleased(int key);
@@ -20,6 +21,6 @@ public:
 	float modelScale;
 
 	KeyboardController();
-	void Initialize();
-	void ProcessKeyStates();
+	void Initialize(MouseController * mouseController);
+	void ProcessKeyStates(float deltaTime);
 };

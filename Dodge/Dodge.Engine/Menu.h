@@ -22,12 +22,20 @@ private:
 public:
 	string name;
 	bool isActive;
+	Button * currentControlButton, * currentAudioButton;
+	Keybind * currentKeybind;
+	UIDescriptors currentAudio;
+	float startingMouseY;
 	static Menu * currentMenu;
 	static map<string, Menu*> all;
-
-	static Menu Add(string name, MouseController * mouseController);
+	
+	static Menu * Add(string name, MouseController * mouseController);
 
 	Menu();
+	void StartKeybindChange(Button * button, Keybind * keybind);
+	void EndKeybindChange(int key);
+	void StartVolumeChange(Button * button, UIDescriptors descriptor);
+	void EndVolumeChange();
 	void SetBackgroundImage(Image * image);
 	void AddButton(Button * button);
 	void AddText(Text * text);

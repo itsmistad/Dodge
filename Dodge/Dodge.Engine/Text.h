@@ -5,12 +5,13 @@
 
 class Text : UIElement
 {
-private:
-	Font * font;
 public:
 	int size;
+	Font * font;
 	wstring content;
 	bool hasOutline, hasDropShadow;
+	using UIElement::displacement;
+	using UIElement::position;
 
 	Text();
 	Text(wstring content, Align align, Vector2 displacement, 
@@ -19,6 +20,7 @@ public:
 	Text(wstring content, Vector2 position,
 		Font * font, int size, XMVECTORF32 color,
 		bool isVisible = true, bool hasOutline = false, bool hasDropShadow = false);
+	Vector2 CalculatePosition();
 	float GetWidth();
 	float GetHeight();
 	void Draw(SpriteBatch * spriteBatch);

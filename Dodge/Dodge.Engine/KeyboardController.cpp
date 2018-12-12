@@ -1,15 +1,19 @@
 #include "Headers.h"
 #include "KeyboardController.h"
+#include "Camera.h"
 #include "SoundManager.h"
+#include "ObjectManager.h"
+#include "Menu.h"
 
 KeyboardController::KeyboardController() { }
 
-void KeyboardController::Initialize()
+void KeyboardController::Initialize(MouseController * _mouseController)
 {
 	keyboard = make_unique<Keyboard>();
 	for (int i = 0x08; i <= 0xFE; i++)
 		AddReleased(i);
 	modelScale = 0;
+	mouseController = _mouseController;
 }
 
 void KeyboardController::AddPressed(int key)
@@ -32,7 +36,7 @@ void KeyboardController::RemoveReleased(int key)
 	released.erase(remove(released.begin(), released.end(), key), released.end());
 }
 
-void KeyboardController::ProcessKeyStates()
+void KeyboardController::ProcessKeyStates(float deltaTime)
 {
 	auto state = keyboard->GetState();
 	for (int i = 0x08; i <= 0xFE; i++)
@@ -44,28 +48,46 @@ void KeyboardController::ProcessKeyStates()
 	}
 
 	// TODO: Handle any "IsKeyPressed" or "IsKeyReleased" events here.
-	auto keybind = Configs::GetKeybinds();
-	auto sndmgr = SoundManager::GetCurrent();
-	if (IsKeyPressed(keybind.forward))
+	auto keybinds = Configs::GetKeybinds();
+	//auto sndmgr = SoundManager::GetCurrent();
+	if (Menu::currentMenu == NULL)
 	{
-		//TODO: Go forward
-		Log::Debug("going forward");
-	}
-	if (IsKeyPressed(keybind.backward))
-	{
-		//TODO: Go backward
-	}
-	if (IsKeyPressed(keybind.left))
-	{
-		//TODO: Go left
-	}
-	if (IsKeyPressed(keybind.right))
-	{
-		//TODO: Go right
-	}
-	if (IsKeyPressed(keybind.sprint))
-	{
-		//TODO: Sprint
+		auto camera = Camera::Main;
+		auto you = ObjectManager::You;
+		camera->movementVelocity = Vector3();
+		if (IsKeyPressed(keybinds.forward->key))
+		{
+			if (IsKeyPressed(keybinds.sprint->key))
+				camera->movementVelocity += camera->GetForward() * Configs::GetGameplay().sprintSpeed;
+			else
+				camera->movementVelocity += camera->GetForward() * Configs::GetGameplay().walkSpeed * (camera->canFreeCam ? .2f : 1.f);
+		}
+		if (IsKeyPressed(keybinds.backward->key))
+		{
+			camera->movementVelocity += camera->GetForward() * -Configs::GetGameplay().walkSpeed * (camera->canFreeCam ? .2f : 1.f);
+		}
+		if (IsKeyPressed(keybinds.left->key))
+		{
+			camera->movementVelocity += camera->GetRight() * -Configs::GetGameplay().walkSpeed * (camera->canFreeCam ? .2f : .6f);
+		}
+		if (IsKeyPressed(keybinds.right->key))
+		{
+			camera->movementVelocity += camera->GetRight() * Configs::GetGameplay().walkSpeed * (camera->canFreeCam ? .2f : .6f);
+		}
+		if (IsKeyPressed(keybinds.jump->key))
+		{
+			if (camera->canFreeCam)
+				camera->movementVelocity += camera->GetUp() * Configs::GetGameplay().jumpSpeed * 0.1f;
+		}
+		if (IsKeyPressed(VK_LCONTROL))
+		{
+			if (camera->canFreeCam)
+				camera->movementVelocity -= camera->GetUp() * Configs::GetGameplay().jumpSpeed * 0.1f;
+		}
+		if (camera->movementVelocity != Vector3::Zero)
+			you->isWalking = true;
+
+		deltaTime;
 	}
 }
 
@@ -76,33 +98,64 @@ void KeyboardController::OnKeyPress(int key)
 		RemoveReleased(key);
 		AddPressed(key);
 
-		// TODO: Handle any "OnKeyPress" events here.
 		auto keybinds = Configs::GetKeybinds();
 		auto sndmgr = SoundManager::GetCurrent();
-		if (key == keybinds.escape)
-		{
-			// Do something...
-		}
+		auto camera = Camera::Main;
+		auto you = ObjectManager::You;
 
 		if (Menu::currentMenu == NULL)
 		{
-			if (key == keybinds.use)
+			if (key == keybinds.use->key)
 			{
 				sndmgr->Play("powerup");
 				//TODO: Activate power up
 			}
-			if (key == keybinds.jump)
+			if (key == keybinds.jump->key && !camera->canFreeCam && you->isGrounded && !you->isJumping)
 			{
 				sndmgr->Play("jump");
-				//TODO: Jump
+				you->isGrounded = false;
+				you->isJumping = true;
+				camera->jumpVelocity = Vector3(0, Configs::GetGameplay().jumpSpeed, 0);
 			}
-			if (key == keybinds.escape)
+			if (key == keybinds.escape->key)
+			{
 				Menu::all["ingame"]->Show();
+				mouseController->SetLock(false);
+			}
+			if (key == VK_F1)
+			{
+				camera->canFreeCam = !camera->canFreeCam;
+				if (camera->canFreeCam)
+				{
+					camera->oldPitch = camera->pitch;
+					camera->oldYaw = camera->yaw;
+					camera->oldPosition = camera->position;
+					camera->gravitationalVelocity = Vector3();
+					camera->jumpVelocity = Vector3();
+				}
+				else
+				{
+					camera->pitch = camera->oldPitch;
+					camera->yaw = camera->oldYaw;
+					camera->position = camera->oldPosition;
+				}
+			}
+			if (key == keybinds.sprint->key && IsKeyPressed(keybinds.forward->key) ||
+				key == keybinds.forward->key && IsKeyPressed(keybinds.sprint->key))
+			{
+				camera->SetGoalFOV(camera->GetDefaultFOV() + 10.f);
+				you->isSprinting = true;
+			}
 		}
 		else
 		{
-			if (key == keybinds.escape && Menu::currentMenu->name == "ingame")
+			if (Menu::currentMenu->currentControlButton != NULL)
+				Menu::currentMenu->EndKeybindChange(key);
+			if (key == keybinds.escape->key && Menu::currentMenu->name == "ingame")
+			{
 				Menu::all["ingame"]->Hide();
+				mouseController->SetLock(true);
+			}
 		}
 	}
 }
@@ -114,7 +167,18 @@ void KeyboardController::OnKeyRelease(int key)
 		RemovePressed(key);
 		AddReleased(key);
 
-		// TODO: Handle any "OnKeyRelease" events here.
+		auto keybinds = Configs::GetKeybinds();
+		auto you = ObjectManager::You;
+
+		if (Menu::currentMenu == NULL)
+		{
+			if (key == keybinds.sprint->key ||
+				key == keybinds.forward->key && IsKeyPressed(keybinds.sprint->key))
+			{
+				Camera::Main->SetGoalFOV(Camera::Main->GetDefaultFOV());
+				you->isSprinting = false;
+			}
+		}
 	}
 }
 
